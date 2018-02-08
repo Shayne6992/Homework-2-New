@@ -21,9 +21,9 @@ string chooseOperation()
     cout << "2.) Consonants" << endl;
     cout << "3.) Digits" << endl;
     cout << "4.) Punctuation" << endl;
-    cout << "5.) User Selection" <<endl;
+    cout << "5.) User Selection" << endl;
     cin >> choice;
-    while (choice < 1 || choice > 5 || cin.fail()) {
+    while (choice < 1 || choice > 6 || cin.fail()) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "That's not a valid choice. Please try again (1-5): ";
@@ -51,15 +51,15 @@ string chooseOperation()
     return response;
 }
 
-/*Get user string*/ char userString()
-{
-    char input[100];
-    cout << "Enter a string: \n";
-    cin.getline(input, 500);
-    
-    return (input[99]);
-    
-}
+///*Get user string*/ string userString()
+//{
+//    char input[100];
+//    cout << "Enter a string: \n";
+//    cin.getline(input, 500);
+//
+//    return (input[cin.getline(input, 500)]);
+//
+//}
 
 int isVowel(char ch){
     switch(ch) {
@@ -160,87 +160,80 @@ int isDigit (char ch)
     
 }
 
-
+void outputString (string userChoice, char input[100])
+{
+    char output[100];
+    
+    if (userChoice == "Vowels") {
+        for (int i = 0, j = 0; input[i] != '\0'; i++) {
+            if (!isVowel(input[i])) {
+                output[j++] = input [i];
+                output[j] = '\0';
+            }
+        }
+        
+        cout << "Input String: " << input << endl;
+        cout << "String without Vowels: " << output;
+    }
+    else if (userChoice == "Consonants")
+    {
+        for (int i = 0, j = 0; input[i] != '\0'; i++) {
+            if (!isConsonant(input[i])) {
+                output[j++] = input [i];
+                output[j] = '\0';
+            }
+        }
+        
+        cout << "Input String: " << input << endl;
+        cout << "String without Consonants: " << output;
+    }
+    else if (userChoice == "Digits")
+    {
+        for (int i = 0, j = 0; input[i] != '\0'; i++) {
+            if (!isDigit(input[i])) {
+                output[j++] = input [i];
+                output[j] = '\0';
+            }
+        }
+        
+        cout << "Input String: " << input << endl;
+        cout << "String without Digits: " << output;
+    }
+    else if (userChoice == "Punctuation")
+    {
+        for (int i = 0, j = 0; input[i] != '\0'; i++) {
+            if (!ispunct(input[i])) {
+                output[j++] = input [i];
+                output[j] = '\0';
+            }
+        }
+        
+        cout << "Input String: " << input << endl;
+        cout << "String without Punctuation: " << output;
+        
+    }
+    
+}
 
 int main(int argc, const char * argv[]) {
     bool done = false;
     
     
     do {
-        char output[100], input[100];
+        char input[100];
         
-        string userSelection = chooseOperation();
-        cin.ignore();
-        cout << "You chose operation: " << userSelection << endl;
-
+        string userSelection = chooseOperation(); // User choice of which operation to conduct.
+        cin.ignore(); // Needed to ignore new line, or it skips next operation.
+        
+        cout << "You chose operation: " << userSelection << endl; // Simply reiterates the users choice.
+        
         cout << "Enter a string: ";
         cin.getline(input, 500);
         
-        if (userSelection == "Vowels") {
-            for (int i = 0, j = 0; input[i] != '\0'; i++) {
-                if (!isVowel(input[i])) {
-                    output[j++] = input [i];
-                    output[j] = '\0';
-                }
-            }
-            
-            cout << "Input String: " << input << endl;
-            cout << "String without Vowels: " << output;
-        }
-       else if (userSelection == "Consonants")
-       {
-           for (int i = 0, j = 0; input[i] != '\0'; i++) {
-               if (!isConsonant(input[i])) {
-                   output[j++] = input [i];
-                   output[j] = '\0';
-               }
-           }
-           
-           cout << "Input String: " << input << endl;
-           cout << "String without Consonants: " << output;
-       }
-        else if (userSelection == "Digits")
-        {
-            for (int i = 0, j = 0; input[i] != '\0'; i++) {
-                if (!isDigit(input[i])) {
-                    output[j++] = input [i];
-                    output[j] = '\0';
-                }
-            }
-            
-            cout << "Input String: " << input << endl;
-            cout << "String without Digits: " << output;
-        }
-        else if (userSelection == "Punctuation")
-        {
-            for (int i = 0, j = 0; input[i] != '\0'; i++) {
-                if (!ispunct(input[i])) {
-                    output[j++] = input [i];
-                    output[j] = '\0';
-                }
-            }
-            
-            cout << "Input String: " << input << endl;
-            cout << "String without Digits: " << output;
-            
-        }
-        /* else if (userSelection == "User Selection")
-        {
-            for (int i = 0, j = 0; input[i] != '\0'; i++) {
-                if (!ispunct(input[i])) {
-                    output[j++] = input [i];
-                    output[j] = '\0';
-                }
-            }
-            
-            cout << "Input String: " << input << endl;
-            cout << "String without Digits: " << output;
-            
-        } */
+        outputString(userSelection, input); // Converts string to user request.
         
-        int response = restartProgram(0, 1);
-        if (response == 0) { done = true; }
-        if (userSelection == "exit") { done = true; };
+        int response = restartProgram(0, 1); // User restart request
+        if (response == 0) { done = true; } // Closes program if requested by user.
     } while (!done);
     
 //    system("pause");
