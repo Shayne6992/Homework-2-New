@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  Homework 2 New
+//  Homework 2: String Manipulation
 //
 //  Created by Shayne Gill on 2/5/18.
 //  Copyright © 2018 Shayne Gill. All rights reserved.
@@ -29,12 +29,10 @@ string chooseOperation()
         cout << "That's not a valid choice. Please try again (1-5): ";
         cin >> choice;
     }
-    
     return fileNames[choice - 1];
-   
 }
 
-/*Rerun Program*/int restartProgram(int minValue, int maxValue)
+/*Rerun Program*/ int restartProgram(int minValue, int maxValue)
 {
     int response = 0;
     cout << endl;
@@ -50,18 +48,7 @@ string chooseOperation()
     }
     return response;
 }
-
-///*Get user string*/ string userString()
-//{
-//    char input[100];
-//    cout << "Enter a string: \n";
-//    cin.getline(input, 500);
-//
-//    return (input[cin.getline(input, 500)]);
-//
-//}
-
-int isVowel(char ch){
+/*Sets vowel characters*/ int isVowel(char ch){
     switch(ch) {
         case 'a':
         case 'e':
@@ -81,7 +68,7 @@ int isVowel(char ch){
             return 0;
     }
 }
-int isConsonant (char ch){
+/*Sets consonant characters*/ int isConsonant (char ch){
     switch (ch) {
         case 'b':
         case 'B':
@@ -135,7 +122,7 @@ int isConsonant (char ch){
             return 0;
     }
 }
-int isDigit (char ch)
+/*Sets digit characters*/ int isDigit (char ch)
 {
     switch (ch) {
         case '1':
@@ -159,8 +146,7 @@ int isDigit (char ch)
     }
     
 }
-
-void outputString (string userChoice, char input[100])
+/*Outputs string removed of user choice*/ void outputString (string userChoice, char input[100])
 {
     char output[100];
     
